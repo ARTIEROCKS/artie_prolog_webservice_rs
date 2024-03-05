@@ -35,7 +35,7 @@ impl Hooks for App {
     fn routes(_ctx: &AppContext) -> AppRoutes {
         AppRoutes::empty()
             .prefix("/api")
-            .add_route(controllers::home::routes())
+            .add_route(controllers::pedagogicalprogram::routes())
     }
 
     fn connect_workers<'a>(_p: &'a mut Processor, _ctx: &'a AppContext) {}
