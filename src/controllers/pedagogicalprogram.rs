@@ -1,8 +1,13 @@
 use loco_rs::prelude::*;
 
-use crate::views::pedagogicalprogram::PedagogicalProgramResponse;
+use crate::{common, views::pedagogicalprogram::PedagogicalProgramResponse};
+use loco_rs::app::AppContext;
 
-async fn get_pedagogical_program() -> Result<Json<PedagogicalProgramResponse>> {
+async fn get_pedagogical_program(State(ctx): State<AppContext>) -> Result<Json<PedagogicalProgramResponse>> {
+    if let Some(settings) = &ctx.config.settings {
+        let settings = common::settings::Settings::from_json(settings)?;
+        println!("mongodb: {:?}", settings.mongodb.unwrap().username);
+    }
     format::json(PedagogicalProgramResponse::new("test-id", "test-institution-id", "test-program"))
 }
 
